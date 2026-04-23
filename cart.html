@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <link rel="stylesheet" href="style/cart.css">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Cart</title>
+</head>
+
+<body>
+    <!-- Cart -->
+    <div id="cartApp">
+
+        <div class="cart-container">
+
+            <h2>Your Cart</h2>
+
+            <div v-if="cart.length === 0">
+                Cart is empty
+            </div>
+
+            <!-- ITEMS -->
+            <div v-for="item in cart" :key="item.id" class="cart-row">
+
+                <img :src="item.image" class="cart-img">
+
+                <div>{{ item.name }}</div>
+
+                <div>
+                    <button class="qty-btn" @click="decreaseQty(item)">−</button>
+                    {{ item.qty }}
+                    <button class="qty-btn" @click="increaseQty(item)">+</button>
+                </div>
+
+                <div>Ksh {{ item.price }}</div>
+
+                <div>
+                    Ksh {{ item.price * item.qty }}
+                </div>
+
+            </div>
+
+            <!-- TOTAL -->
+            <div class="summary">
+                Total: {{ total }}
+            </div>
+
+            <br>
+
+            <button @click="checkout">Checkout</button>
+
+        </div>
+
+    </div>
+    <script src="script/cart.js"></script>
+
+</body>
+
+</html>
