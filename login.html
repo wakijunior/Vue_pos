@@ -12,36 +12,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="style/style.css">
     <title>Login</title>
 </head>
 
 <body>
     <div id="login">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid" style="margin-left: 100px">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="register.html">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.html">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="products.html">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="sales.html">Sales</a>
-                        </li>
-                    </ul>
-                </div>
+        <nav class="navbar">
+            <div class="logo">
+                HewStore
             </div>
+
+            <ul class="nav-links">
+                <li><a href="register.html">Register</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="sales.html">Sales</a></li>
+                <li><a href="products.html">Products</a></li>
+            </ul>
         </nav>
+
+        <!-- Hero -->
+        <section class="hero">
+            <h1>{{ title }}</h1>
+            <p>{{ subtitle }}</p>
+            <button class="btn">Shop Now</button>
+        </section>
         <div class="container">
             <h1>Login Page</h1>
                 <form id="form" name="form" @submit.prevent="loginUser">
@@ -81,38 +76,7 @@
         <script src="https://cdn.datatables.net/2.3.5/js/dataTables.js"></script>
         <script src="https://cdn.datatables.net/2.3.5/js/dataTables.bootstrap5.js"></script>
 
-        <script>
-            Vue.createApp({
-                data() {
-                    return {
-                        email: '',
-                        password: '',
-                        loader: false
-                    }
-                },
-                methods: {
-                    loginUser() {
-                        this.loader = true;
-                        axios.post('http://localhost:5000/login', {
-                            email: this.email,
-                            password: this.password
-                        }).then((response) => {
-                            console.log(response.data);
-
-                            // ✅ SAVE TOKEN
-                            localStorage.setItem("token", response.data.access_token);
-
-                            this.loader = false;
-                        }).catch((error) => {
-
-                            alert(error.response?.data?.error || "Login failed");
-
-                            this.loader = false;
-                        });
-                    }
-                }
-            }).mount('#login');
-        </script>
+        <script src="script/login.js"></script>
 </body>
 
 </html>

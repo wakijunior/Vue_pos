@@ -14,6 +14,26 @@
     <!-- Cart -->
     <div id="cartApp">
 
+        <nav class="navbar">
+            <div class="logo">
+                HewStore
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="register.html">Register</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="sales.html">Sales</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart ({{ cart.length }})</a></li>
+            </ul>
+        </nav>
+
+        <!-- Hero -->
+        <section class="hero">
+            <h1>{{ title }}</h1>
+            <p>{{ subtitle }}</p>
+        </section>
+
         <div class="cart-container">
 
             <h2>Your Cart</h2>
@@ -25,14 +45,15 @@
             <!-- ITEMS -->
             <div v-for="item in cart" :key="item.id" class="cart-row">
 
-                <img :src="item.image" class="cart-img">
+                <img :src="item.product_image" class="cart-img">
 
                 <div>{{ item.name }}</div>
 
                 <div>
+                    <button class="qty-btn" @click="increaseQty(item)">+</button>
                     <button class="qty-btn" @click="decreaseQty(item)">−</button>
                     {{ item.qty }}
-                    <button class="qty-btn" @click="increaseQty(item)">+</button>
+                    
                 </div>
 
                 <div>Ksh {{ item.price }}</div>
